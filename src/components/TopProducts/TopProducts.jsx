@@ -3,31 +3,37 @@ import Img1 from "../../assets/shirt/shirt.png";
 import Img2 from "../../assets/shirt/shirt2.png";
 import Img3 from "../../assets/shirt/shirt3.png";
 import { FaStar } from "react-icons/fa";
+import { useCart } from "../../context/CartContext";
 
 const ProductsData = [
   {
-    id: 1,
+    id: 6,
     img: Img1,
     title: "Casual Wear",
-    description: "Perfect for daily outings. Comfortable, breathable, and stylish.",
+    description: "Perfect for daily outings. Comfortable, breathable.",
+    price: 80,
   },
   {
-    id: 2,
+    id: 7,
     img: Img2,
     title: "Printed Shirt",
-    description: "Stand out with unique prints. High-quality fabric and vibrant colors.",
+    description: "Stand out with unique prints. High-quality fabric.",
+    price: 95,
   },
   {
-    id: 3,
+    id: 8,
     img: Img3,
     title: "Women's Shirt",
-    description: "Elegant designs for the modern woman. Fits perfectly for any occasion.",
+    description: "Elegant designs for the modern woman.",
+    price: 110,
   },
 ];
 
 const TopProducts = ({ handleOrderPopup }) => {
+  const { addToCart } = useCart();
+
   return (
-    <div className="py-10 bg-gray-50 dark:bg-slate-900 transition-colors duration-300">
+    <div className="py-10 bg-gray-50 dark:bg-slate-900 transition-colors duration-300" id="top-products">
       <div className="container">
         {/* Header section */}
         <div className="text-left mb-28">
@@ -73,12 +79,13 @@ const TopProducts = ({ handleOrderPopup }) => {
                 <p className="text-gray-500 group-hover:text-gray-200 duration-300 text-sm line-clamp-2 px-2">
                   {data.description}
                 </p>
+                <div className="mt-2 font-bold text-xl group-hover:text-white duration-300">${data.price}</div>
 
                 <button
-                  className="bg-primary group-hover:bg-white group-hover:text-primary text-white py-2 px-6 rounded-full mt-6 hover:scale-105 duration-300 font-semibold shadow-md"
-                  onClick={handleOrderPopup}
+                  className="bg-primary group-hover:bg-white group-hover:text-primary text-white py-2 px-6 rounded-full mt-4 hover:scale-105 duration-300 font-semibold shadow-md"
+                  onClick={() => addToCart(data)}
                 >
-                  Order Now
+                  Add to Cart
                 </button>
               </div>
             </div>

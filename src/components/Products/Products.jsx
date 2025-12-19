@@ -3,7 +3,8 @@ import Img1 from "../../assets/women/women.png";
 import Img2 from "../../assets/women/women2.jpg";
 import Img3 from "../../assets/women/women3.jpg";
 import Img4 from "../../assets/women/women4.jpg";
-import { FaStar } from "react-icons/fa6";
+import { FaStar, FaCartPlus } from "react-icons/fa"; // Added FaCartPlus
+import { useCart } from "../../context/CartContext";
 
 const ProductsData = [
   {
@@ -13,6 +14,7 @@ const ProductsData = [
     rating: 5.0,
     color: "White",
     aosDelay: "0",
+    price: 150,
   },
   {
     id: 2,
@@ -21,6 +23,7 @@ const ProductsData = [
     rating: 4.5,
     color: "Red",
     aosDelay: "200",
+    price: 120,
   },
   {
     id: 3,
@@ -29,6 +32,7 @@ const ProductsData = [
     rating: 4.7,
     color: "Brown",
     aosDelay: "400",
+    price: 60,
   },
   {
     id: 4,
@@ -37,6 +41,7 @@ const ProductsData = [
     rating: 4.4,
     color: "Yellow",
     aosDelay: "600",
+    price: 45,
   },
   {
     id: 5,
@@ -45,12 +50,15 @@ const ProductsData = [
     rating: 4.5,
     color: "Pink",
     aosDelay: "800",
+    price: 55,
   },
 ];
 
 const Products = () => {
+  const { addToCart } = useCart();
+
   return (
-    <div className="py-20 bg-white dark:bg-slate-950 transition-colors duration-300">
+    <div className="py-20 bg-white dark:bg-slate-950 transition-colors duration-300" id="products">
       <div className="container">
         {/* Header section */}
         <div className="text-center mb-16 max-w-[600px] mx-auto">
@@ -76,14 +84,22 @@ const Products = () => {
                 key={data.id}
                 className="group relative cursor-pointer"
               >
-                <div className="overflow-hidden rounded-2xl shadow-lg hover:shadow-xl transition-shadow duration-300">
+                <div className="overflow-hidden rounded-2xl shadow-lg hover:shadow-xl transition-shadow duration-300 relative">
                   <img
                     src={data.img}
                     alt={data.title}
                     className="h-[250px] w-[200px] object-cover transition-transform duration-500 group-hover:scale-110"
                   />
-                  {/* Overlay */}
-                  <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl"></div>
+                  {/* Overlay with Add to Cart */}
+                  <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center gap-2">
+                    <button
+                      onClick={(e) => { e.stopPropagation(); addToCart(data); }}
+                      className="bg-primary text-white p-3 rounded-full hover:scale-110 transition-transform shadow-lg"
+                      title="Add to Cart"
+                    >
+                      <FaCartPlus className="text-xl" />
+                    </button>
+                  </div>
                 </div>
 
                 <div className="pt-3 text-center sm:text-left">
@@ -97,6 +113,7 @@ const Products = () => {
                       <span className="text-sm font-medium">{data.rating}</span>
                     </div>
                   </div>
+                  <p className="font-bold text-lg mt-1 text-slate-900 dark:text-white">${data.price}</p>
                 </div>
               </div>
             ))}

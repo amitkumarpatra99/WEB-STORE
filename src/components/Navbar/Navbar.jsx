@@ -3,33 +3,36 @@ import { IoMdSearch } from "react-icons/io";
 import { FaCartShopping } from "react-icons/fa6";
 import { FaCaretDown } from "react-icons/fa";
 import DarkMode from "./DarkMode";
+import { Link } from "react-router-dom";
+import { useCart } from "../../context/CartContext";
 
 const Menu = [
-  { id: 1, name: "Home", link: "/#" },
-  { id: 2, name: "Mobiles", link: "/#" },
-  { id: 3, name: "Electronics", link: "/#" },
-  { id: 4, name: "Fashion", link: "/#" },
-  { id: 5, name: "Home", link: "/#" },
+  { id: 1, name: "Home", link: "/" },
+  { id: 2, name: "Mobiles", link: "/#mobiles" },
+  { id: 3, name: "Electronics", link: "/#electronics" },
+  { id: 4, name: "Fashion", link: "/#fashion" },
 ];
 
 const DropdownLinks = [
-  { id: 1, name: "Top Products", link: "/#" },
-  { id: 2, name: "Best Selling", link: "/#" },
-  { id: 3, name: "Top Rated", link: "/#" },
+  { id: 1, name: "Top Products", link: "/#top" },
+  { id: 2, name: "Best Selling", link: "/#best" },
+  { id: 3, name: "Top Rated", link: "/#rated" },
 ];
 
 const Navbar = ({ handleOrderPopup }) => {
+  const { cartItems } = useCart();
+
   return (
     <div className="sticky top-0 z-50 bg-white/80 dark:bg-gray-900/80 backdrop-blur-md border-b border-gray-100 dark:border-gray-800 shadow-sm transition-all duration-300">
       <div className="container py-4 flex justify-between items-center">
         {/* Logo */}
         <div>
-          <a href="#" className="font-bold text-2xl sm:text-3xl flex gap-2 items-center tracking-wide">
+          <Link to="/" className="font-bold text-2xl sm:text-3xl flex gap-2 items-center tracking-wide">
             <div className="w-10 h-10 bg-gradient-to-tr from-primary to-secondary rounded-xl flex items-center justify-center text-white font-extrabold shadow-lg shadow-primary/30">W</div>
             <span className="bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary">
               WebStore
             </span>
-          </a>
+          </Link>
         </div>
 
         {/* Desktop Menu */}
@@ -37,9 +40,9 @@ const Navbar = ({ handleOrderPopup }) => {
           <ul className="flex items-center gap-6">
             {Menu.map((data) => (
               <li key={data.id}>
-                <a href={data.link} className="text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-primary font-medium transition-colors duration-200 text-base">
+                <Link to={data.link} className="text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-primary font-medium transition-colors duration-200 text-base">
                   {data.name}
-                </a>
+                </Link>
               </li>
             ))}
             {/* Dropdown */}
@@ -76,13 +79,17 @@ const Navbar = ({ handleOrderPopup }) => {
           </div>
 
           {/* Cart Button */}
-          <button
-            onClick={handleOrderPopup}
+          <Link
+            to="/cart"
             className="relative p-2 rounded-full bg-gray-100 dark:bg-gray-800 hover:bg-primary hover:text-white dark:hover:bg-primary transition-all duration-300 group"
           >
             <FaCartShopping className="text-xl" />
-            <span className="absolute -top-1 -right-1 w-4 h-4 bg-secondary text-white text-[10px] flex items-center justify-center rounded-full shadow-sm">2</span>
-          </button>
+            {cartItems.length > 0 && (
+              <span className="absolute -top-1 -right-1 w-5 h-5 bg-secondary text-white text-[10px] flex items-center justify-center rounded-full shadow-sm animate-bounce">
+                {cartItems.length}
+              </span>
+            )}
+          </Link>
 
           {/* Dark Mode */}
           <DarkMode />
