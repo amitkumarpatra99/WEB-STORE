@@ -136,6 +136,85 @@ const getCategoryData = (category) => {
                     aosDelay: "600",
                 },
             ];
+        case "top-products":
+            return [
+                {
+                    id: 401,
+                    img: "https://placehold.co/400x600/png?text=Best+Shirt",
+                    title: "Premium Cotton Shirt",
+                    description: "Top rated by customers.",
+                    price: 1500,
+                    rating: 5.0,
+                    color: "White",
+                    aosDelay: "0",
+                },
+                {
+                    id: 402,
+                    img: "https://placehold.co/400x600/png?text=Best+Watch",
+                    title: "Luxury Watch",
+                    description: "Elegant and timeless.",
+                    price: 15000,
+                    rating: 4.9,
+                    color: "Gold",
+                    aosDelay: "200",
+                },
+                {
+                    id: 403,
+                    img: "https://placehold.co/400x600/png?text=Best+Shoes",
+                    title: "Running Shoes",
+                    description: "Best for marathon.",
+                    price: 5000,
+                    rating: 4.8,
+                    color: "Blue",
+                    aosDelay: "400",
+                },
+            ];
+        case "best-selling":
+            return [
+                {
+                    id: 501,
+                    img: "https://placehold.co/400x600/png?text=Trending+1",
+                    title: "Wireless Earbuds",
+                    description: "Best selling audio gear.",
+                    price: 2500,
+                    rating: 4.6,
+                    color: "Black",
+                    aosDelay: "0",
+                },
+                {
+                    id: 502,
+                    img: "https://placehold.co/400x600/png?text=Trending+2",
+                    title: "Smart Band",
+                    description: "Track your fitness.",
+                    price: 1800,
+                    rating: 4.5,
+                    color: "Black",
+                    aosDelay: "200",
+                },
+            ];
+        case "top-rated":
+            return [
+                {
+                    id: 601,
+                    img: "https://placehold.co/400x600/png?text=Rated+1",
+                    title: "Gaming Mouse",
+                    description: "High precision.",
+                    price: 3000,
+                    rating: 5.0,
+                    color: "RGB",
+                    aosDelay: "0",
+                },
+                {
+                    id: 602,
+                    img: "https://placehold.co/400x600/png?text=Rated+2",
+                    title: "Mechanical Keyboard",
+                    description: "Clicky and tactile.",
+                    price: 4500,
+                    rating: 4.9,
+                    color: "Black",
+                    aosDelay: "200",
+                },
+            ];
         default:
             return [];
     }

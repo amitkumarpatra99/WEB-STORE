@@ -15,9 +15,9 @@ const Menu = [
 ];
 
 const DropdownLinks = [
-  { id: 1, name: "Top Products", link: "/#top" },
-  { id: 2, name: "Best Selling", link: "/#best" },
-  { id: 3, name: "Top Rated", link: "/#rated" },
+  { id: 1, name: "Top Products", link: "/top-products" },
+  { id: 2, name: "Best Selling", link: "/best-selling" },
+  { id: 3, name: "Top Rated", link: "/top-rated" },
 ];
 
 const Navbar = ({ handleOrderPopup }) => {
@@ -48,17 +48,17 @@ const Navbar = ({ handleOrderPopup }) => {
             ))}
             {/* Dropdown */}
             <li className="group relative cursor-pointer font-medium text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-primary transition-colors">
-              <a href="#" className="flex items-center gap-1">
+              <span className="flex items-center gap-1">
                 Trending
                 <FaCaretDown className="group-hover:rotate-180 transition-transform duration-300" />
-              </a>
+              </span>
               <div className="absolute top-full right-0 mt-4 w-48 rounded-xl bg-white dark:bg-gray-800 shadow-xl border border-gray-100 dark:border-gray-700 p-2 hidden group-hover:block transition-all animate-fadeIn">
                 <ul>
                   {DropdownLinks.map((data) => (
                     <li key={data.id}>
-                      <a href={data.link} className="block px-4 py-2 rounded-lg text-sm text-gray-700 dark:text-gray-200 hover:bg-primary/10 hover:text-primary transition-colors">
+                      <Link to={data.link} className="block px-4 py-2 rounded-lg text-sm text-gray-700 dark:text-gray-200 hover:bg-primary/10 hover:text-primary transition-colors">
                         {data.name}
-                      </a>
+                      </Link>
                     </li>
                   ))}
                 </ul>
