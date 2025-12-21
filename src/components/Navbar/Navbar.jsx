@@ -2,6 +2,7 @@ import React from "react";
 import { IoMdSearch } from "react-icons/io";
 import { FaCartShopping } from "react-icons/fa6";
 import { FaCaretDown } from "react-icons/fa";
+import { HiMenuAlt3, HiMenuAlt1 } from "react-icons/hi";
 import DarkMode from "./DarkMode";
 import { Link } from "react-router-dom";
 import { useCart } from "../../context/CartContext";
@@ -22,6 +23,11 @@ const DropdownLinks = [
 
 const Navbar = ({ handleOrderPopup }) => {
   const { cartItems } = useCart();
+  const [showMenu, setShowMenu] = React.useState(false);
+
+  const toggleMenu = () => {
+    setShowMenu(!showMenu);
+  };
 
   return (
     <div className="sticky top-0 z-50 bg-white/80 dark:bg-gray-900/80 backdrop-blur-md border-b border-gray-100 dark:border-gray-800 shadow-sm transition-all duration-300">
@@ -99,7 +105,61 @@ const Navbar = ({ handleOrderPopup }) => {
 
           {/* Dark Mode */}
           <DarkMode />
+
+          {/* Mobile Menu Toggle */}
+          <div className="flex items-center gap-4 lg:hidden">
+            {showMenu ? (
+              <HiMenuAlt1
+                onClick={toggleMenu}
+                className="cursor-pointer transition-all"
+                size={30}
+              />
+            ) : (
+              <HiMenuAlt3
+                onClick={toggleMenu}
+                className="cursor-pointer transition-all"
+                size={30}
+              />
+            )}
+          </div>
         </div>
+      </div>
+
+      {/* Mobile Menu */}
+      <div className={`fixed top-0 right-0 w-2/3 h-screen bg-white dark:bg-gray-900 shadow-2xl z-[9999] p-6 lg:hidden transition-all duration-300 ${showMenu ? "translate-x-0" : "translate-x-full"}`}>
+        <div className="flex justify-between items-center mb-8">
+          <h1 className="text-2xl font-bold text-primary">Menu</h1>
+          <HiMenuAlt1 onClick={toggleMenu} className="cursor-pointer" size={30} />
+        </div>
+        <ul className="flex flex-col gap-6">
+          {Menu.map((data) => (
+            <li key={data.id}>
+              <Link
+                to={data.link}
+                onClick={toggleMenu}
+                className="text-lg font-medium text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-primary transition-colors duration-200 block"
+              >
+                {data.name}
+              </Link>
+            </li>
+          ))}
+          {/* Mobile Dropdown Links */}
+          <li className="border-t border-gray-200 dark:border-gray-700 pt-4">
+            <span className="text-sm text-gray-400 uppercase tracking-widest mb-4 block">Categories</span>
+            <div className="flex flex-col gap-4 pl-2">
+              {DropdownLinks.map((data) => (
+                <Link
+                  key={data.id}
+                  to={data.link}
+                  onClick={toggleMenu}
+                  className="text-base text-gray-600 dark:text-gray-300 hover:text-primary transition-colors"
+                >
+                  {data.name}
+                </Link>
+              ))}
+            </div>
+          </li>
+        </ul>
       </div>
     </div>
   );
