@@ -1,13 +1,12 @@
 import React from "react";
-import LightButton from "../../assets/website/light-mode-button.png";
-import DarkButton from "../../assets/website/dark-mode-button.png";
+import { FaSun, FaMoon } from "react-icons/fa";
 
 const DarkMode = () => {
   const [theme, setTheme] = React.useState(
     localStorage.getItem("theme") ? localStorage.getItem("theme") : "light"
   );
 
-  const element = document.documentElement; // html element
+  const element = document.documentElement;
 
   React.useEffect(() => {
     if (theme === "dark") {
@@ -20,22 +19,12 @@ const DarkMode = () => {
   }, [theme]);
 
   return (
-    <div className="relative">
-      <img
-        src={LightButton}
-        alt=""
-        onClick={() => setTheme(theme === "light" ? "dark" : "light")}
-        className={`w-12 cursor-pointer drop-shadow-[1px_1px_1px_rgba(0,0,0,0.1)] transition-all duration-300 absolute right-0 z-10 ${
-          theme === "dark" ? "opacity-0" : "opacity-100"
-        } `}
-      />
-      <img
-        src={DarkButton}
-        alt=""
-        onClick={() => setTheme(theme === "light" ? "dark" : "light")}
-        className="w-12 cursor-pointer drop-shadow-[1px_1px_1px_rgba(0,0,0,0.1)] transition-all duration-300"
-      />
-    </div>
+    <button
+      onClick={() => setTheme(theme === "light" ? "dark" : "light")}
+      className="text-2xl text-gray-500 dark:text-gray-400 hover:text-primary dark:hover:text-primary transition-colors duration-300 p-1"
+    >
+      {theme === "light" ? <FaMoon /> : <FaSun className="text-yellow-400" />}
+    </button>
   );
 };
 
