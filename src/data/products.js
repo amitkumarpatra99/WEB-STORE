@@ -6,7 +6,7 @@ import Shirt1 from "../assets/shirt/shirt.png";
 import Shirt2 from "../assets/shirt/shirt2.png";
 import Shirt3 from "../assets/shirt/shirt3.png";
 import Iphone15 from "../assets/mobiles/iphone-15-pro.jpg";
-import SamsungS24 from "../assets/mobiles/samsung-s24.png";
+import SamsungS24 from "../assets/mobiles/samsung-s24.jpg";
 import Pixel8 from "../assets/mobiles/pixel-8.jpg";
 import Oneplus12 from "../assets/mobiles/oneplus-12.jpg";
 import Xiaomi14 from "../assets/mobiles/xiaomi-14.jpg";
@@ -15,8 +15,8 @@ import SonyHeadphones from "../assets/electronics/sony-headphones.jpg";
 import MacbookAir from "../assets/electronics/macbook-air.jpg";
 import IpadAir from "../assets/electronics/ipad-air.jpg";
 import AppleWatch from "../assets/electronics/apple-watch.jpg";
-import JblFlip6 from "../assets/electronics/jbl-flip-6.png";
-import CanonR50 from "../assets/electronics/canon-r50.png";
+import JblFlip6 from "../assets/electronics/jbl-flip-6.jpg";
+import CanonR50 from "../assets/electronics/canon-r50.jpg";
 
 const products = [
     // Featured Products (Home Page)
