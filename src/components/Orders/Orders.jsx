@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useOrder } from "../../context/OrderContext";
 import OrderActionsModal from "./OrderActionsModal";
+import CancelPopup from "../Popup/CancelPopup";
 
 const OrderStepper = ({ timeline, status }) => {
     if (status === "Cancelled") {
@@ -31,14 +32,19 @@ const OrderStepper = ({ timeline, status }) => {
 const Orders = () => {
     const { orders, cancelOrder, updateOrderDetails } = useOrder();
     const [modalConfig, setModalConfig] = useState({ isOpen: false, type: null, order: null });
+    const [showCancelPopup, setShowCancelPopup] = useState(false);
 
     const openModal = (type, order) => {
         setModalConfig({ isOpen: true, type, order });
     };
 
     const handleConfirm = (data) => {
+        console.log("handleConfirm called", modalConfig.type);
         if (modalConfig.type === "cancel") {
+            console.log("Cancelling order...");
             cancelOrder(modalConfig.order.id);
+            setShowCancelPopup(true);
+            console.log("Popup state set to true");
         } else if (modalConfig.type === "edit") {
             updateOrderDetails(modalConfig.order.id, data);
         }
@@ -47,6 +53,16 @@ const Orders = () => {
     return (
         <div className="container py-14 min-h-[60vh] dark:text-white">
             <h1 className="text-3xl font-bold mb-10 text-center">My Orders</h1>
+
+            {/* Debug Button - Remove after testing */}
+            <div className="mb-4 text-center">
+                <button
+                    onClick={() => setShowCancelPopup(true)}
+                    className="px-4 py-2 bg-gray-200 dark:bg-gray-700 rounded text-xs"
+                >
+                    Test Cancel Popup
+                </button>
+            </div>
 
             {orders.length === 0 ? (
                 <div className="text-center">
@@ -139,6 +155,11 @@ const Orders = () => {
                 order={modalConfig.order || {}}
                 onClose={() => setModalConfig({ ...modalConfig, isOpen: false })}
                 onConfirm={handleConfirm}
+            />
+
+            <CancelPopup
+                visible={showCancelPopup}
+                onClose={() => setShowCancelPopup(false)}
             />
         </div>
     );

@@ -10,7 +10,7 @@ const Layout = ({ handleOrderPopup }) => {
         window.scrollTo(0, 0);
     }, [pathname]);
 
-    return (
+    return ( 
         <>
             <Navbar handleOrderPopup={handleOrderPopup} />
             <Outlet />

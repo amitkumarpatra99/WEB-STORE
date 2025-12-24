@@ -34,7 +34,11 @@ export const OrderProvider = ({ children }) => {
         setOrders((prev) =>
             prev.map((order) =>
                 order.id === orderId
-                    ? { ...order, status: "Cancelled", timeline: order.timeline.map(t => ({ ...t, completed: false })) }
+                    ? {
+                        ...order,
+                        status: "Cancelled",
+                        timeline: order.timeline?.map((t) => ({ ...t, completed: false })) || order.timeline
+                    }
                     : order
             )
         );
