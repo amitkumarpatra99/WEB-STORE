@@ -19,6 +19,9 @@ import Order from "./components/Order/Order";
 import Orders from "./components/Orders/Orders";
 import ProductDetails from "./pages/ProductDetails";
 import { OrderProvider } from "./context/OrderContext";
+import { AuthProvider } from "./context/AuthContext";
+import Login from "./pages/Login";
+import Signup from "./pages/Signup";
 import { Toaster } from "react-hot-toast";
 
 // Landing Page Component
@@ -53,28 +56,32 @@ const App = () => {
 
   return (
     <CartProvider>
-      <OrderProvider>
-        <BrowserRouter>
-          <div className="bg-white dark:bg-gray-900 dark:text-white duration-200">
-            <Routes>
-              <Route path="/" element={<Layout handleOrderPopup={handleOrderPopup} />}>
-                <Route index element={<Home handleOrderPopup={handleOrderPopup} />} />
-                <Route path="mobiles" element={<CategoryPage category="mobiles" />} />
-                <Route path="electronics" element={<CategoryPage category="electronics" />} />
-                <Route path="fashion" element={<CategoryPage category="fashion" />} />
-                <Route path="top-products" element={<CategoryPage category="top-products" title="Top Products" />} />
-                <Route path="best-selling" element={<CategoryPage category="best-selling" title="Best Selling" />} />
-                <Route path="top-rated" element={<CategoryPage category="top-rated" title="Top Rated" />} />
-                <Route path="product/:id" element={<ProductDetails />} />
-                <Route path="cart" element={<Cart />} />
-                <Route path="checkout" element={<Order />} />
-                <Route path="orders" element={<Orders />} />
-              </Route>
-            </Routes>
-          </div>
-          <Toaster position="bottom-center" />
-        </BrowserRouter>
-      </OrderProvider>
+      <AuthProvider>
+        <OrderProvider>
+          <BrowserRouter>
+            <div className="bg-white dark:bg-gray-900 dark:text-white duration-200">
+              <Routes>
+                <Route path="/" element={<Layout handleOrderPopup={handleOrderPopup} />}>
+                  <Route index element={<Home handleOrderPopup={handleOrderPopup} />} />
+                  <Route path="mobiles" element={<CategoryPage category="mobiles" />} />
+                  <Route path="electronics" element={<CategoryPage category="electronics" />} />
+                  <Route path="fashion" element={<CategoryPage category="fashion" />} />
+                  <Route path="top-products" element={<CategoryPage category="top-products" title="Top Products" />} />
+                  <Route path="best-selling" element={<CategoryPage category="best-selling" title="Best Selling" />} />
+                  <Route path="top-rated" element={<CategoryPage category="top-rated" title="Top Rated" />} />
+                  <Route path="product/:id" element={<ProductDetails />} />
+                  <Route path="cart" element={<Cart />} />
+                  <Route path="checkout" element={<Order />} />
+                  <Route path="orders" element={<Orders />} />
+                  <Route path="login" element={<Login />} />
+                  <Route path="signup" element={<Signup />} />
+                </Route>
+              </Routes>
+            </div>
+            <Toaster position="bottom-center" />
+          </BrowserRouter>
+        </OrderProvider>
+      </AuthProvider>
     </CartProvider>
   );
 };
