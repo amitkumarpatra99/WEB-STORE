@@ -7,7 +7,7 @@ import DarkMode from "./DarkMode";
 import { Link, useNavigate } from "react-router-dom";
 import { useCart } from "../../context/CartContext";
 import { useAuth } from "../../context/AuthContext";
-import { useAuth } from "../../context/AuthContext";
+
 import { FaUser, FaHeart } from "react-icons/fa6";
 import { useWishlist } from "../../context/WishlistContext";
 
