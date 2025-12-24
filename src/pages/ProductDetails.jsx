@@ -1,19 +1,31 @@
 import React, { useEffect, useState } from "react";
-import { useParams, Link } from "react-router-dom";
-import { FaStar, FaCartPlus, FaArrowLeft } from "react-icons/fa";
+import { useParams, Link, useNavigate } from "react-router-dom";
+import { FaStar, FaCartPlus, FaArrowLeft, FaHeart } from "react-icons/fa";
 import { useCart } from "../context/CartContext";
+import { useWishlist } from "../context/WishlistContext";
 import { getProductById } from "../data/products";
+import toast from "react-hot-toast";
 
 const ProductDetails = () => {
     const { id } = useParams();
     const { addToCart } = useCart();
+    const { addToWishlist, removeFromWishlist, isInWishlist } = useWishlist();
     const [product, setProduct] = useState(null);
+    const navigate = useNavigate();
 
     useEffect(() => {
         const data = getProductById(id);
         setProduct(data);
         window.scrollTo(0, 0); // Scroll to top when page loads
     }, [id]);
+
+    const handleBuyNow = () => {
+        addToCart(product);
+        toast.success("Proceeding to checkout");
+        navigate("/checkout");
+    };
+
+    const isLiked = product ? isInWishlist(product.id) : false;
 
     if (!product) {
         return (
@@ -81,7 +93,7 @@ const ProductDetails = () => {
                         <div className="border-t border-gray-200 dark:border-gray-700 my-6 pt-6"></div>
 
                         {/* Actions */}
-                        <div className="flex gap-4">
+                        <div className="flex flex-col sm:flex-row gap-4">
                             <button
                                 onClick={() => addToCart(product)}
                                 className="flex-1 bg-primary text-white py-4 rounded-xl font-bold text-lg hover:bg-primary/90 hover:shadow-lg transition-all flex items-center justify-center gap-2"
@@ -89,10 +101,21 @@ const ProductDetails = () => {
                                 <FaCartPlus /> Add to Cart
                             </button>
                             <button
+                                onClick={handleBuyNow}
                                 className="flex-1 border-2 border-slate-900 dark:border-white text-slate-900 dark:text-white py-4 rounded-xl font-bold text-lg hover:bg-slate-900 hover:text-white dark:hover:bg-white dark:hover:text-black transition-all"
-                                onClick={() => alert("Proceeding to checkout...")} // Placeholder
                             >
                                 Buy Now
+                            </button>
+                            {/* Wishlist Button */}
+                            <button
+                                onClick={() => isLiked ? removeFromWishlist(product.id) : addToWishlist(product)}
+                                className={`w-full sm:w-auto px-6 py-4 rounded-xl font-bold text-lg border-2 flex items-center justify-center transition-all ${isLiked
+                                    ? "bg-red-500 border-red-500 text-white hover:bg-red-600"
+                                    : "border-gray-300 text-gray-400 hover:border-red-500 hover:text-red-500"
+                                    }`}
+                                title={isLiked ? "Remove from Wishlist" : "Add to Wishlist"}
+                            >
+                                <FaHeart className={isLiked ? "animate-pulse" : ""} />
                             </button>
                         </div>
                     </div>
