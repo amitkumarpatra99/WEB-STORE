@@ -27,6 +27,10 @@ import Wishlist from "./pages/Wishlist";
 import SearchResults from "./pages/SearchResults";
 import { WishlistProvider } from "./context/WishlistContext";
 import { Toaster } from "react-hot-toast";
+import About from "./pages/About";
+import Contact from "./pages/Contact";
+import NotFound from "./pages/NotFound";
+import ScrollToTop from "./components/ScrollToTop/ScrollToTop";
 
 // Landing Page Component
 const Home = ({ handleOrderPopup }) => (
@@ -64,6 +68,7 @@ const App = () => {
         <WishlistProvider>
           <OrderProvider>
             <BrowserRouter>
+              <ScrollToTop />
               <div className="bg-white dark:bg-gray-900 dark:text-white duration-200">
                 <Routes>
                   <Route path="/" element={<Layout handleOrderPopup={handleOrderPopup} />}>
@@ -83,6 +88,9 @@ const App = () => {
                     <Route path="profile" element={<Profile />} />
                     <Route path="search" element={<SearchResults />} />
                     <Route path="wishlist" element={<Wishlist />} />
+                    <Route path="about" element={<About />} />
+                    <Route path="contact" element={<Contact />} />
+                    <Route path="*" element={<NotFound />} />
                   </Route>
                 </Routes>
               </div>
