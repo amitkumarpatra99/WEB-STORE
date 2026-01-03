@@ -4,28 +4,29 @@ import Slider from "react-slick";
 const TestimonialData = [
   {
     id: 1,
-    name: "Victor",
-    text: "Absolutely love the quality! The delivery was super fast and the packaging was excellent. Highly recommended.",
-    img: "https://picsum.photos/101/101",
-  },
-  {
-    id: 2,
-    name: "Satya Nadella",
-    text: "Great experience shopping here. The customer support team was very helpful and the product exceeded my expectations.",
-    img: "https://picsum.photos/102/102",
-  },
-  {
-    id: 3,
     name: "Virat Kohli",
     text: "Premium items at affordable prices. I've bought multiple times and have never been disappointed.",
     img: "https://picsum.photos/104/104",
   },
+    {
+    id: 2,
+    name: "Anushka Sharma",
+    text: "I love the products here! They are stylish and affordable. Delivery was also very fast.",
+    img: "https://picsum.photos/106/106",
+  },
   {
-    id: 4,
+    id: 3,
     name: "Sachin Tendulkar",
-    text: " The variety of products is amazing. Found exactly what I was looking for. Will definitely shop again!",
+    text: "The variety of products is amazing. Found exactly what I was looking for. Will definitely shop again!",
     img: "https://picsum.photos/103/103",
   },
+  {
+    id: 4,
+    name: "Rohit Sharma",
+    text: "Excellent quality and great customer service. I highly recommend this store to everyone.",
+    img: "https://picsum.photos/105/105",
+  },
+
 ];
 
 const Testimonials = () => {
